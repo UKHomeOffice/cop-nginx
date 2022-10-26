@@ -4,8 +4,8 @@ on:
   workflow_dispatch:
 
 env:
-  IMAGE_NAME: cop-nginx
-  IMAGE_REPO: quay.io/ukhomeofficedigital
+  DEST_IMAGE_NAME: cop-nginx
+  DEST_IMAGE_REPO: quay.io/ukhomeofficedigital
 
 jobs:
   get_datetime:
@@ -35,6 +35,5 @@ jobs:
 
       - name: Copy with Skopeo
         run: |
-          skopeo --version
-          echo "Got date ${{ needs.get_datetime.outputs.datetime }}"
-          echo "Got tag ${{ matrix.tag }}"
+          skopeo copy docker://docker.io/nginxinc/nginx-unprivileged:${{ matrix.tag }} \
+                      docker://quay.io/ukhomeofficedigital/cop-nginx:${{ matrix.tag }}-${{ needs.get_datetime.outputs.datetime }}.0
