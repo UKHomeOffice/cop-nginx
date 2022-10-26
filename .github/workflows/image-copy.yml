@@ -23,7 +23,7 @@ jobs:
     needs: get_datetime
     strategy:
       matrix:
-        tag: ['alpine']
+        tag: ['alpine', 'alpine-slim', 'mainline']
 
     steps:
       - name: Login to Quay.io
