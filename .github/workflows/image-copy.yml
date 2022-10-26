@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - id: datetime
-        run: echo "::set-output name=now::$(date +%Y%m%d%H%M)"
+        run: echo "now=$(date +%Y%m%d%H%M)" >> $GITHUB_OUTPUT
 
   copy_to_quay:
     name: Copy Image to Quay
